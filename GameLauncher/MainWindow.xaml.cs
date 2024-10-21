@@ -75,11 +75,11 @@ namespace GameLauncher
                 try
                 {
                     WebClient webClient = new WebClient();
-                    Version onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk")); // upload file todo
+                    Version onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk"));
 
                     if (onlineVersion.IsDifferentThan(localVersion))
                     {
-                        InstallGameFiles(true, onlineVersion); // might have to be false.
+                        InstallGameFiles(true, onlineVersion);
                     }
                     else
                     {
@@ -110,10 +110,10 @@ namespace GameLauncher
                 else
                 {
                     Status = LauncherStatus.downloadingGame;
-                    _onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk")); // upload file todo
+                    _onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk"));
                 }
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadGameCompletedCallBack);
-                webClient.DownloadFileAsync(new Uri("https://drive.google.com/uc?export=download&id=1EDmuSdZ4nzJsbbSomB3btOIhorbXTCAO"), gameZip, _onlineVersion); // upload file todo
+                webClient.DownloadFileAsync(new Uri("https://drive.google.com/uc?export=download&id=1EDmuSdZ4nzJsbbSomB3btOIhorbXTCAO"), gameZip, _onlineVersion);
             }
             catch (Exception ex)
             {
