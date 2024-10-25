@@ -70,16 +70,16 @@ namespace GameLauncher
             if (File.Exists(versionFile))
             {
                 Version localVersion = new Version(File.ReadAllText(versionFile));
-                VersionText.Text = localVersion.ToString();
+                VersionText.Text = $"v{localVersion.ToString()}";
 
                 try
                 {
                     WebClient webClient = new WebClient();
-                    Version onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk"));
+                    Version onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk")); // upload file todo
 
                     if (onlineVersion.IsDifferentThan(localVersion))
                     {
-                        InstallGameFiles(true, onlineVersion);
+                        InstallGameFiles(true, onlineVersion); // might have to be false.
                     }
                     else
                     {
@@ -110,10 +110,10 @@ namespace GameLauncher
                 else
                 {
                     Status = LauncherStatus.downloadingGame;
-                    _onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk"));
+                    _onlineVersion = new Version(webClient.DownloadString("https://drive.google.com/uc?export=download&id=1AQO-bB3JJ1mDbGPt7Pi-bhBJps2DhYkk")); // upload file todo
                 }
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadGameCompletedCallBack);
-                webClient.DownloadFileAsync(new Uri("https://drive.google.com/uc?export=download&id=1EDmuSdZ4nzJsbbSomB3btOIhorbXTCAO"), gameZip, _onlineVersion);
+                webClient.DownloadFileAsync(new Uri("https://drive.google.com/uc?export=download&id=1EDmuSdZ4nzJsbbSomB3btOIhorbXTCAO"), gameZip, _onlineVersion); // upload file todo
             }
             catch (Exception ex)
             {
@@ -131,7 +131,7 @@ namespace GameLauncher
                 File.Delete(gameZip);
                 File.WriteAllText(versionFile, onlineVersion);
 
-                VersionText.Text = onlineVersion;
+                VersionText.Text = $"v{onlineVersion}";
                 Status = LauncherStatus.ready;
             }
             catch (Exception ex)
@@ -216,7 +216,7 @@ namespace GameLauncher
 
         public override string ToString()
         {
-            return $"v{major}.{minor}.{subMinor}"; //$ allows us to rteurn an interpolated string with expressions in it.
+            return $"{major}.{minor}.{subMinor}"; //$ allows us to rteurn an interpolated string with expressions in it.
         }
     }
 }
